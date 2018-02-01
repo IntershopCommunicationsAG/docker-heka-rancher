@@ -19,9 +19,6 @@ ENV CONFD_VERSION 0.11.0
 ADD https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 /usr/local/bin/confd
 RUN chmod a+x /usr/local/bin/confd
 
-# Maybe there are other dependencies
-ADD ./special /usr/share/heka/lua_decoders
-
 COPY asset/rootfs /
 COPY asset/start.sh /
 

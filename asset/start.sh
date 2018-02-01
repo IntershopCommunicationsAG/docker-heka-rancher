@@ -15,7 +15,7 @@
 #  limitations under the License.
 #
 
-set -eo pipefail
+set -e
 
 # Loop until confd has updated the heka config
 until confd -onetime -backend rancher; do

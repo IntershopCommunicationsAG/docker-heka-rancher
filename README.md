@@ -55,6 +55,9 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 # Third-party License heka-docker
 
+Github: https://github.com/ianneub/docker-heka
+Dockerhub: https://hub.docker.com/r/ianneub/heka
+
 ```
 The MIT License (MIT)
 
@@ -80,6 +83,8 @@ SOFTWARE.
 ```
 
 # Third-party License mozilla-services heka
+
+Github: https://github.com/mozilla-services/heka
 
 ```
 # This Source Code Form is subject to the terms of the Mozilla Public
