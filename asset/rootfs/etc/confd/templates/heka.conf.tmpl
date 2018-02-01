@@ -1,0 +1,60 @@
+#
+# Copyright 2015 Intershop Communications AG.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+[haproxy_udp_input]
+type = "UdpInput"
+address = "0.0.0.0:2514"
+decoder = "haproxy_log_decoder"
+splitter = "NullSplitter"
+
+[haproxy_log_decoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/haproxy.lua"
+
+[haproxy_log_decoder.config]
+type = "haproxy"
+payload_keep = true
+
+[nginx_udp_input]
+type = "UdpInput"
+address = "0.0.0.0:514"
+splitter = "NullSplitter"
+decoder = "nginx_log_decoder"
+
+[nginx_log_decoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/rsyslog.lua"
+
+[nginx_log_decoder.config]
+type = "RSYSLOG_TraditionalForwardFormat"
+template = '<%PRI%>%TIMESTAMP% %HOSTNAME% %syslogtag:1:32%%msg:::sp-if-no-1st-sp%%msg%'
+
+[PayloadEncoder]
+
+[KafkaOutputNginx]
+type = "KafkaOutput"
+message_matcher = "Logger == 'nginx_udp_input'"
+topic = "{{getv "/latest/self/service/metadata/kafka/nginxTopic"}}"
+addrs = [{{getv "/latest/self/service/metadata/kafka/addrs"}}]
+encoder = "PayloadEncoder"
+wait_for_election = 3000
+
+[KafkaOutputHaproxy]
+type = "KafkaOutput"
+message_matcher = "Logger == 'haproxy_udp_input'"
+topic = "{{getv "/latest/self/service/metadata/kafka/haproxyTopic"}}"
+addrs = [{{getv "/latest/self/service/metadata/kafka/addrs"}}]
+encoder = "PayloadEncoder"
+wait_for_election = 3000

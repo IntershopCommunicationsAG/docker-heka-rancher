@@ -1,0 +1,11 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+*.sh text eol=lf
+Dockerfile eol=lf
+*.toml text eol=lf
+*.conf text eol=lf
+*.conf.tmpl text eol=lf
+*.conf.default text eol=lf
+
+text eol=lf
