@@ -49,7 +49,7 @@ message_matcher = "Logger == 'nginx_udp_input'"
 topic = "{{getv "/latest/self/service/metadata/kafka/nginxTopic"}}"
 addrs = [{{getv "/latest/self/service/metadata/kafka/addrs"}}]
 encoder = "PayloadEncoder"
-wait_for_election = 3000
+wait_for_election = {{getv "/latest/self/service/metadata/kafka/waitForElection"}}
 
 [KafkaOutputHaproxy]
 type = "KafkaOutput"
@@ -57,4 +57,4 @@ message_matcher = "Logger == 'haproxy_udp_input'"
 topic = "{{getv "/latest/self/service/metadata/kafka/haproxyTopic"}}"
 addrs = [{{getv "/latest/self/service/metadata/kafka/addrs"}}]
 encoder = "PayloadEncoder"
-wait_for_election = 3000
+wait_for_election = {{getv "/latest/self/service/metadata/kafka/waitForElection"}}

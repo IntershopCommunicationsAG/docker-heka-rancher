@@ -25,4 +25,4 @@ done
 
 # Start heka
 echo "[heka-confd] starting heka service..."
-/heka/build/heka/bin/hekad --config /app/config.toml
+/heka/build/heka/bin/hekad --config /app/heka.conf

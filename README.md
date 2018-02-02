@@ -12,6 +12,7 @@ Configuration allows to specify:
 * kafka servers via `metadata/kafka/addrs`
 * kafka topic for nginx via `metadata/kafka/nginxTopic`
 * kafka topic for haproxy via `metadata/kafka/haproxyTopic`
+* `wait_for_election` via `metadata/kafka/waitForElection`
 See example configuration below.
 
 # Example Rancher configuration

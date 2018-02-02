@@ -20,6 +20,7 @@ ADD https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}
 RUN chmod a+x /usr/local/bin/confd
 
 COPY asset/rootfs /
+COPY asset/usr/share/heka/lua_decoders /usr/share/heka/lua_decoders
 COPY asset/start.sh /
 
 CMD ["/start.sh"]
